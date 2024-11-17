@@ -1,7 +1,7 @@
 const Vehicle = require('./models/vehicleModel.js');
 
 
-const getVehicleDataByModel = async (req, res) => {
+const getVehicleData = async (req, res) => {
     const { model } = req.params;
     if (!model)
         return res.status(404).json({ error: 'No such model found' });
