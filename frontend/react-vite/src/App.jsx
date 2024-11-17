@@ -16,7 +16,11 @@ function App() {
   <div className="Rectangle4" style={{width: 1440, height: 75, left: 0, top: 143, position: 'absolute', background: '#DD4141'}} />
   <div className="Line01" style={{width: 820, height: 526, left: 590, top: 275, position: 'absolute'}}>
     <div className="Vector" style={{width: 820, height: 526, left: 0, top: 0, position: 'absolute', background: 'white'}}></div>
+<<<<<<< HEAD
     <div className="Vector" style={{width: 662.24, height: 1, left: 98.60, top: 467.65, position: 'absolute', border: '1px rgba(130, 136, 152, 0.50) dotted'}}></div>
+=======
+    <div className="Vector" style={{width: 662.24, height: 0, left: 98.60, top: 467.65, position: 'absolute', border: '1px rgba(130, 136, 152, 0.50) dotted'}}></div>
+>>>>>>> f0d9f374a973cfdfd98b5a4547370ea284e3c3f2
     <div className="Vector" style={{width: 662.24, height: 0, left: 98.60, top: 365.73, position: 'absolute', border: '1px rgba(130, 136, 152, 0.50) dotted'}}></div>
     <div className="Vector" style={{width: 662.24, height: 0, left: 98.60, top: 263.82, position: 'absolute', border: '1px rgba(130, 136, 152, 0.50) dotted'}}></div>
     <div className="Vector" style={{width: 662.24, height: 0, left: 98.60, top: 161.91, position: 'absolute', border: '1px rgba(130, 136, 152, 0.50) dotted'}}></div>
@@ -66,7 +70,11 @@ function App() {
     <div style={{width: 23.01, height: 27.94, left: 716.23, top: 478.47, position: 'absolute', textAlign: 'center', color: '#828898', fontSize: 11, fontFamily: 'Inter', fontWeight: '400', lineHeight: 16.50, wordWrap: 'break-word'}}>29</div>
     <div className="ClipPathGroup" style={{width: 668.82, height: 412.58, left: 95.31, top: 56.71, position: 'absolute'}}>
       <div className="Zr137C0" style={{width: 668.82, height: 412.58, left: 0, top: 0, position: 'absolute'}}>
+<<<<<<< HEAD
         <div className="Vector" style={{width: 668.82, height: 412.58, left: 0, top: 0, position: 'absolute', background: 'white'}}></div>
+=======
+        <div className="Vector" style={{width: 668.82, height: 412.58, left: 0, top: 0, position: 'absolute', background: 'black'}}></div>
+>>>>>>> f0d9f374a973cfdfd98b5a4547370ea284e3c3f2
         <div className="Line3" style={{width: 662, height: 0, left: 3.69, top: 276.25, position: 'absolute', border: '2px #EEA750 solid'}}></div>
       </div>
       <div className="Group" style={{width: 663, height: 340.39, left: 3.69, top: 2.47, position: 'absolute'}}>
