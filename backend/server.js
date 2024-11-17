@@ -3,13 +3,16 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const multer = require('multer');
-const xlsx = require('xlsx');
-const path = require('path');
-const fs = require('fs');
 const vehicleRoutes = require('./routes/vehicles.js')
 const chatBotRoutes = require('./routes/chatBot.js');
+const cors = require('cors');
 
 const app = express();
+app.use(cors({
+    origin: 'http://localhost:3000', // Your frontend's origin
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
+    allowedHeaders: ['Content-Type'], // Allowed headers
+}));
 
 app.use(express.json()); // ensures that any incoming JSON request body is parsed and available on req.body
 
@@ -24,38 +27,38 @@ app.use('/api/vehicles', vehicleRoutes);
 const upload = multer({ dest: 'uploads/' });
 
 app.post('/upload', upload.single('file'), (req, res) => {
-  if (!req.file) {
-    return res.status(400).send('No file uploaded.');
-  }
+    if (!req.file) {
+        return res.status(400).send('No file uploaded.');
+    }
 
-  const filePath = path.join(__dirname, req.file.path);
-  const workbook = xlsx.readFile(filePath);
-  
-  const sheetName = workbook.SheetNames[0]; // assuming your data is in the first sheet and it starts at row 1
+    const filePath = path.join(__dirname, req.file.path);
+    const workbook = xlsx.readFile(filePath);
 
-  const sheet = workbook.Sheets[sheetName];
+    const sheetName = workbook.SheetNames[0]; // assuming your data is in the first sheet and it starts at row 1
 
-  const jsonData = xlsx.utils.sheet_to_json(sheet);  // Parse the data from the sheet to JSON
+    const sheet = workbook.Sheets[sheetName];
 
-  const filteredData = jsonData.map((row) => ({
-    year: row['Model Year'],
-    manufacturer: row['Mfr Name'],
-    model: row['Carline'],
-    transmission: row['Transmission'],
-    cylinders: row['# Cyl'],
-    cityFE: row['City FE (Guide) - Conventional Fuel'],
-    highwayFE: row['Hwy FE (Guide) - Conventional Fuel'],
-    combinedFE: row['Comb FE (Guide) - Conventional Fuel']
-  }));
-  
-  Vehicle.insertMany(filteredData)
-    .then(() => {
-      res.send('Data has been successfully uploaded and stored.');
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send('Error inserting data into MongoDB.');
-    });
+    const jsonData = xlsx.utils.sheet_to_json(sheet);  // Parse the data from the sheet to JSON
+
+    const filteredData = jsonData.map((row) => ({
+        year: row['Model Year'],
+        manufacturer: row['Mfr Name'],
+        model: row['Carline'],
+        transmission: row['Transmission'],
+        cylinders: row['# Cyl'],
+        cityFE: row['City FE (Guide) - Conventional Fuel'],
+        highwayFE: row['Hwy FE (Guide) - Conventional Fuel'],
+        combinedFE: row['Comb FE (Guide) - Conventional Fuel']
+    }));
+
+    Vehicle.insertMany(filteredData)
+        .then(() => {
+            res.send('Data has been successfully uploaded and stored.');
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send('Error inserting data into MongoDB.');
+        });
 });
 
 // Define the filename to store conversation history

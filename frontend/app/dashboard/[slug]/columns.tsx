@@ -10,12 +10,14 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { StarFilledIcon } from "@/components/icons"
 
 export type Car = {
-    model: string,
-    year: number,
-    rating: number
-    cityMpg: number,
-    highwayMpg: number,
-}
+    model: string;
+    year: number;
+    rating: number;
+    cityMpg: number;
+    highwayMpg: number;
+    transmission: string;
+    manufacturer: string;
+};
 
 export const columns: ColumnDef<Car>[] = [
     {

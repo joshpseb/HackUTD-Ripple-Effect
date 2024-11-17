@@ -10,34 +10,33 @@ type Props = {
 }
 
 export default function Chart({ chartData }: Props) {
-    // Transform the data to have MPG types as categories
+    const sortedData = chartData.sort((a, b) => a.year - b.year);
     const transformedData = [
         {
             category: "City MPG",
-            [chartData[0]?.model]: chartData[0]?.cityMpg,
-            [chartData[1]?.model]: chartData[1]?.cityMpg,
+            [sortedData[0]?.model]: sortedData[0]?.cityMpg,
+            [sortedData[1]?.model]: sortedData[1]?.cityMpg,
         },
         {
             category: "Highway MPG",
-            [chartData[0]?.model]: chartData[0]?.highwayMpg,
-            [chartData[1]?.model]: chartData[1]?.highwayMpg,
+            [sortedData[0]?.model]: sortedData[0]?.highwayMpg,
+            [sortedData[1]?.model]: sortedData[1]?.highwayMpg,
         },
         {
             category: "Combined MPG",
-            [chartData[0]?.model]: (chartData[0]?.cityMpg + chartData[0]?.highwayMpg) / 2,
-            [chartData[1]?.model]: (chartData[1]?.cityMpg + chartData[1]?.highwayMpg) / 2,
+            [sortedData[0]?.model]: (sortedData[0]?.cityMpg + sortedData[0]?.highwayMpg) / 2,
+            [sortedData[1]?.model]: (sortedData[1]?.cityMpg + sortedData[1]?.highwayMpg) / 2,
         },
     ];
 
-    // Dynamic chart config based on selected cars
     const chartConfig = {
-        [chartData[0]?.model]: {
-            label: chartData[0]?.model,
-            color: "#2563eb", // Dark blue
+        [sortedData[0]?.model]: {
+            label: sortedData[0]?.model,
+            color: "#2563eb",
         },
-        [chartData[1]?.model]: {
-            label: chartData[1]?.model,
-            color: "#60a5fa", // Light blue
+        [sortedData[1]?.model]: {
+            label: sortedData[1]?.model,
+            color: "#60a5fa",
         },
     } satisfies ChartConfig;
 
@@ -53,17 +52,17 @@ export default function Chart({ chartData }: Props) {
                 <ChartLegend content={<ChartLegendContent />} />
                 <ChartTooltip content={<ChartTooltipContent />} />
                 <CartesianGrid vertical={false} />
-                {chartData[0] && (
+                {sortedData[0] && (
                     <Bar
-                        dataKey={chartData[0].model}
-                        fill={`var(--color-${chartData[0].model})`}
+                        dataKey={sortedData[0].model}
+                        fill={`var(--color-${sortedData[0].model})`}
                         radius={4}
                     />
                 )}
-                {chartData[1] && (
+                {sortedData[1] && (
                     <Bar
-                        dataKey={chartData[1].model}
-                        fill={`var(--color-${chartData[1].model})`}
+                        dataKey={sortedData[1].model}
+                        fill={`var(--color-${sortedData[1].model})`}
                         radius={4}
                     />
                 )}

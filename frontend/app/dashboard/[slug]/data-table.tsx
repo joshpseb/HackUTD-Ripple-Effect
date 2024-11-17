@@ -64,10 +64,10 @@ export function DataTable<TData, TValue>({
                             .filter(
                                 (column) => column.getCanHide()
                             )
-                            .map((column) => {
+                            .map((column, index) => {
                                 return (
                                     <DropdownMenuCheckboxItem
-                                        key={column.id}
+                                        key={index}
                                         className="capitalize"
                                         checked={column.getIsVisible()}
                                         onCheckedChange={(value) =>
@@ -84,11 +84,11 @@ export function DataTable<TData, TValue>({
             <div className="rounded-md border">
                 <Table>
                     <TableHeader>
-                        {table.getHeaderGroups().map((headerGroup) => (
-                            <TableRow key={headerGroup.id}>
-                                {headerGroup.headers.map((header) => {
+                        {table.getHeaderGroups().map((headerGroup, index) => (
+                            <TableRow key={index}>
+                                {headerGroup.headers.map((header, index) => {
                                     return (
-                                        <TableHead key={header.id}>
+                                        <TableHead key={index}>
                                             {header.isPlaceholder
                                                 ? null
                                                 : flexRender(
@@ -103,13 +103,13 @@ export function DataTable<TData, TValue>({
                     </TableHeader>
                     <TableBody>
                         {table.getRowModel().rows?.length ? (
-                            table.getRowModel().rows.map((row) => (
+                            table.getRowModel().rows.map((row, index) => (
                                 <TableRow
-                                    key={row.id}
+                                    key={index}
                                     data-state={row.getIsSelected() && "selected"}
                                 >
-                                    {row.getVisibleCells().map((cell) => (
-                                        <TableCell key={cell.id}>
+                                    {row.getVisibleCells().map((cell, index) => (
+                                        <TableCell key={index}>
                                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                         </TableCell>
                                     ))}
@@ -127,7 +127,7 @@ export function DataTable<TData, TValue>({
             </div>
             <div className="flex justify-between py-4">
                 <div className="flex-1 text-sm text-muted-foreground">
-                    {table.getFilteredSelectedRowModel().rows.length} of 2 row(s) selected.
+                    {table.getFilteredSelectedRowModel().rows.length} of {data.length} row(s) selected.
                 </div>
                 <div className="flex items-center justify-end space-x-2">
                     <Button
