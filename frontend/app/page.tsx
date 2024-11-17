@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import ImportButton from "@/components/ui/importButton";  // Import ImportButton component
 
 export default function Home() {
     const [inputValue, setInputValue] = useState("")
@@ -16,6 +17,7 @@ export default function Home() {
                 }} />
                 <Link href={`/dashboard/${inputValue}`} className={buttonVariants()}>Go</Link>
             </div>
+            <ImportButton />
         </main>
     );
 }
