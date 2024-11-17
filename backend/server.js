@@ -1,13 +1,23 @@
 require('dotenv').config();
 
-const Vehicle = require('./vehicleModel');
 const express = require('express');
 const mongoose = require('mongoose');
 const multer = require('multer');
 const xlsx = require('xlsx');
 const path = require('path');
+const Vehicle = require('./vehicleModel');
+const chatBotRoutes = require('./routes/chatBot.js');
 
 const app = express();
+
+app.use(express.json()); // ensures that any incoming JSON request body is parsed and available on req.body
+
+app.use((req, res, next) => {
+    console.log(req.path, req.method);
+    next();
+});
+
+app.use('/api/chatBot', chatBotRoutes);
 
 const upload = multer({ dest: 'uploads/' });
 
